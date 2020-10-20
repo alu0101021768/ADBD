@@ -7,5 +7,5 @@ Componentes del Grupo:
 
 # Práctica 1: Presentación Supuesto Proyecto de Bases de Datos
 	
-	- PDF :	([Supuesto Práctico](/documentos/supuesto.pdf)).
+	- [Supuesto Práctico](/documentos/supuesto.pdf)
 
