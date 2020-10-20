@@ -5,6 +5,6 @@ Componentes del Grupo:
 
  **Néstor Torres Díaz** - alu0101021768@ull.edu.es
 
-# Práctica 1: Presentación Supuesto Proyecto de Bases de Datos
+## Práctica 1: Presentación Supuesto Proyecto de Bases de Datos
 
-[Supuesto Practico](/documentos/supuesto.pdf)
+- PDF con el Supuesto : [Supuesto Practico](/documentos/supuesto.pdf)
