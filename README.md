@@ -4,7 +4,9 @@ Componentes del Grupo:
  **Chesen Castilla Gil** - alu0101046853@ull.edu.es
 
  **Néstor Torres Díaz** - alu0101021768@ull.edu.es
+ 
+ **Edgar Figueroa González** - alu0101043838@ull.edu.es
 
 ## Práctica 1: Presentación Supuesto Proyecto de Bases de Datos
 
-- PDF con el Supuesto : [Supuesto Practico](/documentos/supuesto.pdf)
+- PDF con el Supuesto : [Supuesto Práctico](/documentos/supuesto.pdf)
