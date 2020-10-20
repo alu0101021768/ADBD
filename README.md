@@ -3,5 +3,5 @@
  ### Chesen Castilla Gil - alu0101046853@ull.edu.es
  ### Néstor Torres Díaz - alu0101021768@ull.edu.es
 
-[PDF](/documentos/supuesto.pdf)
+![Supuesto](/documentos/supuesto.pdf){width=65%}
 
