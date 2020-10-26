@@ -10,3 +10,9 @@ Componentes del Grupo:
 ## Práctica 1: Presentación Supuesto Proyecto de Bases de Datos
 
 - PDF con el Supuesto : [Supuesto Práctico](/documentos/supuesto.pdf)
+
+## Práctica 2: Diseño Viveros
+
+- PDF con descriptivo: [Descripción](/documentos/viveros.pdf)
+- Esquema E/R(.drawio): [Esquema](/práctica2/vivero.drawio)
+![imágenio](/documentos/vivero.png)
