@@ -14,5 +14,5 @@ Componentes del Grupo:
 ## Práctica 2: Diseño Viveros
 
 - PDF con descriptivo: [Descripción](/documentos/viveros.pdf)
-- Esquema E/R(.drawio): [Esquema](/práctica2/vivero.drawio)
+- Esquema E/R(.drawio): [Esquema](/práctica2/viveros.drawio)
 ![imágenio](/documentos/vivero.png)
