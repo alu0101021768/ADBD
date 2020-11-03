@@ -13,6 +13,12 @@ Componentes del Grupo:
 
 ## Práctica 2: Diseño Viveros
 
-- PDF con descriptivo: [Descripción](/documentos/viveros.pdf)
+- PDF descriptivo: [Descripción](/documentos/viveros.pdf)
 - Esquema E/R(.drawio): [Esquema](/pract02/viveros.drawio)
 ![imágenio](/pract02/vivero.png)
+
+## Práctica 3: Diseño Barco
+
+- PDF descriptivo: [Descripción](/documentos/barco.pdf)
+- Esquema E/R(.drawio): [Esquema](/pract03/barco.drawio)
+![imagenbarco](/pract03/barco.png)
