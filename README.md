@@ -33,8 +33,8 @@ Componentes del Grupo:
 
 ### Vivero
 
-- Script Vivero: [Script](/pract04/) 
-- Modelo WorkBench Vivero: [Modelo](/pract04/) 
+- Script Vivero: [Script](/pract04/SQL_SCRIPT_VIVEROS.sql) 
+- Modelo WorkBench Vivero: [Modelo](/pract04/viveros.mwb) 
 ![imagenviveros](/pract04/viveros.png)
 
 
