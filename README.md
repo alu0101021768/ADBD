@@ -27,9 +27,9 @@ Componentes del Grupo:
 - Script catastro: [Catastro_Script](/pract04/SQL_SCRIPT_CATASTRO.sql)
 - Script viveros: [Viveros_Script](/pract04/SQL_SCRIPT_VIVEROS.sql)
 - Imagen diseño catastro: 
-![imagencatastro](/pract04/diseño_catastro.png)
+![imagencatastro](/pract04/catastro.png)
 - Imagen diseño viveros: 
-![imagenviveros](/pract04/catastro.png)
+![imagenviveros](/pract04/viveros.png)
 
 
 
