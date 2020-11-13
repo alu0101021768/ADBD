@@ -27,14 +27,14 @@ Componentes del Grupo:
 
 ### Catastro
 
-- Script Catastro: [catastroscript](/pract04/SQL_SCRIPT_CATASTRO.sql)
-- Modelo WorkBench Catastro: [catastrowork](/pract04/)
+- Script Catastro: [Script](/pract04/SQL_SCRIPT_CATASTRO.sql)
+- Modelo WorkBench Catastro: [Modelo](/pract04/catastro.mwb)
 ![imagencatastro](/pract04/catastro.png)
 
 ### Vivero
 
-- Script Vivero: [viveroscript](/pract04/) 
-- Modelo WorkBench Vivero: [viverowork](/pract04/) 
+- Script Vivero: [Script](/pract04/) 
+- Modelo WorkBench Vivero: [Modelo](/pract04/) 
 ![imagenviveros](/pract04/viveros.png)
 
 
