@@ -22,3 +22,14 @@ Componentes del Grupo:
 - PDF descriptivo: [Descripción](/documentos/barco.pdf)
 - Esquema E/R(.drawio): [Esquema](/pract03/barco.drawio)
 ![imagenbarco](/pract03/barco.png)
+
+## Práctica 4: Modelo Lógico Relacional
+- Script catastro: [Catastro_Script](/pract04/SQL_CATASTRO_SCRIPT.sql)
+- Script viveros: [Viveros_Script](/pract04/SQL_VIVEROS_SCRIPT.sql)
+- Imagen diseño catastro: 
+![imagencatastro](/pract04/diseño_catastro.png)
+- Imagen diseño viveros: 
+![imagenviveros](/pract04/diseño_catastro.png)
+
+
+
