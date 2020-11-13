@@ -24,12 +24,12 @@ Componentes del Grupo:
 ![imagenbarco](/pract03/barco.png)
 
 ## Práctica 4: Modelo Lógico Relacional
-- Script catastro: [Catastro_Script](/pract04/SQL_CATASTRO_SCRIPT.sql)
-- Script viveros: [Viveros_Script](/pract04/SQL_VIVEROS_SCRIPT.sql)
+- Script catastro: [Catastro_Script](/pract04/SQL_SCRIPT_CATASTRO.sql)
+- Script viveros: [Viveros_Script](/pract04/SQL_SCRIPT_VIVEROS.sql)
 - Imagen diseño catastro: 
 ![imagencatastro](/pract04/diseño_catastro.png)
 - Imagen diseño viveros: 
-![imagenviveros](/pract04/diseño_catastro.png)
+![imagenviveros](/pract04/catastro.png)
 
 
 
