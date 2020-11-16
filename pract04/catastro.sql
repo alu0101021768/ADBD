@@ -8,19 +8,19 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema catastro
 -- -----------------------------------------------------
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema catastro
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
-USE `mydb` ;
+CREATE SCHEMA IF NOT EXISTS `catastro` DEFAULT CHARACTER SET utf8 ;
+USE `catastro` ;
 
 -- -----------------------------------------------------
--- Table `mydb`.`Zona`
+-- Table `catastro`.`Zona`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Zona` (
+CREATE TABLE IF NOT EXISTS `catastro`.`Zona` (
   `nombre` VARCHAR(45) NOT NULL,
   `area` VARCHAR(45) NOT NULL,
   `concejal` VARCHAR(45) NULL,
@@ -29,9 +29,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Vivienda`
+-- Table `catastro`.`Vivienda`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Vivienda` (
+CREATE TABLE IF NOT EXISTS `catastro`.`Vivienda` (
   `calle` VARCHAR(45) NOT NULL,
   `numero` INT NOT NULL,
   `numero_personas` INT NULL,
@@ -40,16 +40,16 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Vivienda` (
   INDEX `fk_Vivienda_Zona1_idx` (`Zona_nombre` ASC) VISIBLE,
   CONSTRAINT `fk_Vivienda_Zona1`
     FOREIGN KEY (`Zona_nombre`)
-    REFERENCES `mydb`.`Zona` (`nombre`)
+    REFERENCES `catastro`.`Zona` (`nombre`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Bloque`
+-- Table `catastro`.`Bloque`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Bloque` (
+CREATE TABLE IF NOT EXISTS `catastro`.`Bloque` (
   `calle` VARCHAR(45) NOT NULL,
   `numero` INT NOT NULL,
   `numero_personas` INT NULL AUTO_INCREMENT,
@@ -58,16 +58,16 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Bloque` (
   INDEX `fk_Bloque_Zona1_idx` (`Zona_nombre` ASC) VISIBLE,
   CONSTRAINT `fk_Bloque_Zona1`
     FOREIGN KEY (`Zona_nombre`)
-    REFERENCES `mydb`.`Zona` (`nombre`)
+    REFERENCES `catastro`.`Zona` (`nombre`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Piso`
+-- Table `catastro`.`Piso`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Piso` (
+CREATE TABLE IF NOT EXISTS `catastro`.`Piso` (
   `planta` INT NOT NULL,
   `letra` VARCHAR(3) NOT NULL,
   `Bloque_calle` VARCHAR(45) NOT NULL,
@@ -77,16 +77,16 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Piso` (
   INDEX `fk_Piso_Bloque1_idx` (`Bloque_calle` ASC, `Bloque_numero` ASC, `Bloque_Zona_nombre` ASC) VISIBLE,
   CONSTRAINT `fk_Piso_Bloque1`
     FOREIGN KEY (`Bloque_calle` , `Bloque_numero` , `Bloque_Zona_nombre`)
-    REFERENCES `mydb`.`Bloque` (`calle` , `numero` , `Zona_nombre`)
+    REFERENCES `catastro`.`Bloque` (`calle` , `numero` , `Zona_nombre`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Persona`
+-- Table `catastro`.`Persona`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Persona` (
+CREATE TABLE IF NOT EXISTS `catastro`.`Persona` (
   `DNI` VARCHAR(9) NOT NULL,
   `nombre` VARCHAR(45) NOT NULL,
   `fecha_nac` DATE NOT NULL,
@@ -104,12 +104,12 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Persona` (
   INDEX `fk_Persona_Piso1_idx` (`Piso_planta` ASC, `Piso_letra` ASC, `Piso_Bloque_calle` ASC, `Piso_Bloque_numero` ASC, `Piso_Bloque_Zona_nombre` ASC) VISIBLE,
   CONSTRAINT `fk_Persona_Vivienda1`
     FOREIGN KEY (`Vivienda_calle` , `Vivienda_numero` , `Vivienda_Zona_nombre`)
-    REFERENCES `mydb`.`Vivienda` (`calle` , `numero` , `Zona_nombre`)
+    REFERENCES `catastro`.`Vivienda` (`calle` , `numero` , `Zona_nombre`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT `fk_Persona_Piso1`
     FOREIGN KEY (`Piso_planta` , `Piso_letra` , `Piso_Bloque_calle` , `Piso_Bloque_numero` , `Piso_Bloque_Zona_nombre`)
-    REFERENCES `mydb`.`Piso` (`planta` , `letra` , `Bloque_calle` , `Bloque_numero` , `Bloque_Zona_nombre`)
+    REFERENCES `catastro`.`Piso` (`planta` , `letra` , `Bloque_calle` , `Bloque_numero` , `Bloque_Zona_nombre`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
