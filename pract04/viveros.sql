@@ -8,19 +8,19 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='ONLY_FULL_GROUP_BY,STRICT_TRANS_TABLES,NO_ZERO_IN_DATE,NO_ZERO_DATE,ERROR_FOR_DIVISION_BY_ZERO,NO_ENGINE_SUBSTITUTION';
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema viveros
 -- -----------------------------------------------------
 
 -- -----------------------------------------------------
--- Schema mydb
+-- Schema viveros
 -- -----------------------------------------------------
-CREATE SCHEMA IF NOT EXISTS `mydb` DEFAULT CHARACTER SET utf8 ;
-USE `mydb` ;
+CREATE SCHEMA IF NOT EXISTS `viveros` DEFAULT CHARACTER SET utf8 ;
+USE `viveros` ;
 
 -- -----------------------------------------------------
--- Table `mydb`.`Zona`
+-- Table `viveros`.`Zona`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Zona` (
+CREATE TABLE IF NOT EXISTS `viveros`.`Zona` (
   `cod_zona` INT NOT NULL,
   `nombre` VARCHAR(45) NOT NULL,
   `num_empleados` INT NULL,
@@ -29,9 +29,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Producto`
+-- Table `viveros`.`Producto`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Producto` (
+CREATE TABLE IF NOT EXISTS `viveros`.`Producto` (
   `cod_prod` INT NOT NULL,
   `tipo` VARCHAR(45) NULL,
   `precio` FLOAT NOT NULL,
@@ -41,28 +41,28 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Vivero`
+-- Table `viveros`.`Vivero`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Vivero` (
+CREATE TABLE IF NOT EXISTS `viveros`.`Vivero` (
   `localizacion_x` FLOAT NOT NULL,
   `localizacion_y` FLOAT NOT NULL,
   `nombre` VARCHAR(45) NOT NULL,
   `superficie` FLOAT NULL,
   `ZONA_nombre` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`localizacion_x`, `ZONA_nombre`, `localizacion_y`),
-  INDEX `fk_VIVERO_ZONA1_idx` (`ZONA_nombre` ASC) VISIBLE,
+  INDEX `fk_VIVERO_ZONA1_idx` (`ZONA_nombre` ASC)  ,
   CONSTRAINT `fk_VIVERO_ZONA1`
     FOREIGN KEY (`ZONA_nombre`)
-    REFERENCES `mydb`.`Zona` (`nombre`)
+    REFERENCES `viveros`.`Zona` (`nombre`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Empleado`
+-- Table `viveros`.`Empleado`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Empleado` (
+CREATE TABLE IF NOT EXISTS `viveros`.`Empleado` (
   `dni` VARCHAR(45) NOT NULL,
   `nombre` VARCHAR(45) NOT NULL,
   `sueldo` FLOAT NOT NULL,
@@ -74,9 +74,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Cliente`
+-- Table `viveros`.`Cliente`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Cliente` (
+CREATE TABLE IF NOT EXISTS `viveros`.`Cliente` (
   `dni` VARCHAR(45) NOT NULL,
   `codigo` INT NOT NULL,
   `nombre` VARCHAR(45) NOT NULL,
@@ -88,9 +88,9 @@ ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Pedido`
+-- Table `viveros`.`Pedido`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Pedido` (
+CREATE TABLE IF NOT EXISTS `viveros`.`Pedido` (
   `codigo` INT NOT NULL,
   `fecha` DATE NOT NULL,
   `importe` FLOAT NOT NULL,
@@ -98,84 +98,84 @@ CREATE TABLE IF NOT EXISTS `mydb`.`Pedido` (
   `EMPLEADO_dni` VARCHAR(45) NOT NULL,
   `CLIENTE_dni` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`codigo`, `EMPLEADO_dni`, `CLIENTE_dni`),
-  INDEX `fk_PEDIDO_EMPLEADO1_idx` (`EMPLEADO_dni` ASC) VISIBLE,
-  INDEX `fk_PEDIDO_CLIENTE1_idx` (`CLIENTE_dni` ASC) VISIBLE,
+  INDEX `fk_PEDIDO_EMPLEADO1_idx` (`EMPLEADO_dni` ASC)  ,
+  INDEX `fk_PEDIDO_CLIENTE1_idx` (`CLIENTE_dni` ASC)  ,
   CONSTRAINT `fk_PEDIDO_EMPLEADO1`
     FOREIGN KEY (`EMPLEADO_dni`)
-    REFERENCES `mydb`.`Empleado` (`dni`)
+    REFERENCES `viveros`.`Empleado` (`dni`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT `fk_PEDIDO_CLIENTE1`
     FOREIGN KEY (`CLIENTE_dni`)
-    REFERENCES `mydb`.`Cliente` (`dni`)
+    REFERENCES `viveros`.`Cliente` (`dni`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Zona_has_Producto`
+-- Table `viveros`.`Zona_has_Producto`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Zona_has_Producto` (
+CREATE TABLE IF NOT EXISTS `viveros`.`Zona_has_Producto` (
   `Zona_nombre` VARCHAR(45) NOT NULL,
   `Producto_cod_prod` INT NOT NULL,
   PRIMARY KEY (`Zona_nombre`, `Producto_cod_prod`),
-  INDEX `fk_Zona_has_Producto_Producto1_idx` (`Producto_cod_prod` ASC) VISIBLE,
-  INDEX `fk_Zona_has_Producto_Zona1_idx` (`Zona_nombre` ASC) VISIBLE,
+  INDEX `fk_Zona_has_Producto_Producto1_idx` (`Producto_cod_prod` ASC)  ,
+  INDEX `fk_Zona_has_Producto_Zona1_idx` (`Zona_nombre` ASC)  ,
   CONSTRAINT `fk_Zona_has_Producto_Zona1`
     FOREIGN KEY (`Zona_nombre`)
-    REFERENCES `mydb`.`Zona` (`nombre`)
+    REFERENCES `viveros`.`Zona` (`nombre`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT `fk_Zona_has_Producto_Producto1`
     FOREIGN KEY (`Producto_cod_prod`)
-    REFERENCES `mydb`.`Producto` (`cod_prod`)
+    REFERENCES `viveros`.`Producto` (`cod_prod`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Zona_has_Empleado`
+-- Table `viveros`.`Zona_has_Empleado`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Zona_has_Empleado` (
+CREATE TABLE IF NOT EXISTS `viveros`.`Zona_has_Empleado` (
   `Zona_nombre` VARCHAR(45) NOT NULL,
   `Empleado_dni` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`Zona_nombre`, `Empleado_dni`),
-  INDEX `fk_Zona_has_Empleado_Empleado1_idx` (`Empleado_dni` ASC) VISIBLE,
-  INDEX `fk_Zona_has_Empleado_Zona1_idx` (`Zona_nombre` ASC) VISIBLE,
+  INDEX `fk_Zona_has_Empleado_Empleado1_idx` (`Empleado_dni` ASC)  ,
+  INDEX `fk_Zona_has_Empleado_Zona1_idx` (`Zona_nombre` ASC)  ,
   CONSTRAINT `fk_Zona_has_Empleado_Zona1`
     FOREIGN KEY (`Zona_nombre`)
-    REFERENCES `mydb`.`Zona` (`nombre`)
+    REFERENCES `viveros`.`Zona` (`nombre`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT `fk_Zona_has_Empleado_Empleado1`
     FOREIGN KEY (`Empleado_dni`)
-    REFERENCES `mydb`.`Empleado` (`dni`)
+    REFERENCES `viveros`.`Empleado` (`dni`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
 
 -- -----------------------------------------------------
--- Table `mydb`.`Pedido_has_Producto`
+-- Table `viveros`.`Pedido_has_Producto`
 -- -----------------------------------------------------
-CREATE TABLE IF NOT EXISTS `mydb`.`Pedido_has_Producto` (
+CREATE TABLE IF NOT EXISTS `viveros`.`Pedido_has_Producto` (
   `Pedido_codigo` INT NOT NULL,
   `Pedido_EMPLEADO_dni` VARCHAR(45) NOT NULL,
   `Pedido_CLIENTE_dni` VARCHAR(45) NOT NULL,
   `Producto_cod_prod` INT NOT NULL,
   PRIMARY KEY (`Pedido_codigo`, `Pedido_EMPLEADO_dni`, `Pedido_CLIENTE_dni`, `Producto_cod_prod`),
-  INDEX `fk_Pedido_has_Producto_Producto1_idx` (`Producto_cod_prod` ASC) VISIBLE,
-  INDEX `fk_Pedido_has_Producto_Pedido1_idx` (`Pedido_codigo` ASC, `Pedido_EMPLEADO_dni` ASC, `Pedido_CLIENTE_dni` ASC) VISIBLE,
+  INDEX `fk_Pedido_has_Producto_Producto1_idx` (`Producto_cod_prod` ASC)  ,
+  INDEX `fk_Pedido_has_Producto_Pedido1_idx` (`Pedido_codigo` ASC, `Pedido_EMPLEADO_dni` ASC, `Pedido_CLIENTE_dni` ASC)  ,
   CONSTRAINT `fk_Pedido_has_Producto_Pedido1`
     FOREIGN KEY (`Pedido_codigo` , `Pedido_EMPLEADO_dni` , `Pedido_CLIENTE_dni`)
-    REFERENCES `mydb`.`Pedido` (`codigo` , `EMPLEADO_dni` , `CLIENTE_dni`)
+    REFERENCES `viveros`.`Pedido` (`codigo` , `EMPLEADO_dni` , `CLIENTE_dni`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
   CONSTRAINT `fk_Pedido_has_Producto_Producto1`
     FOREIGN KEY (`Producto_cod_prod`)
-    REFERENCES `mydb`.`Producto` (`cod_prod`)
+    REFERENCES `viveros`.`Producto` (`cod_prod`)
     ON DELETE CASCADE
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
