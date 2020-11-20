@@ -37,6 +37,8 @@ CREATE TABLE IF NOT EXISTS `catastro`.`Vivienda` (
   `numero_personas` INT NULL,
   `Zona_nombre` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`calle`, `numero`, `Zona_nombre`),
+  INDEX `fk_Vivienda_Zona1_idx` (`Zona_nombre` ASC) ,
+  CONSTRAINT `fk_Vivienda_Zona1`
     FOREIGN KEY (`Zona_nombre`)
     REFERENCES `catastro`.`Zona` (`nombre`)
     ON DELETE CASCADE
@@ -52,7 +54,10 @@ CREATE TABLE IF NOT EXISTS `catastro`.`Bloque` (
   `numero` INT NOT NULL,
   `numero_personas` INT NOT NULL ,
   `Zona_nombre` VARCHAR(45) NOT NULL,
-  PRIMARY KEY (`calle`, `numero`,`Zona_nombre`),
+  PRIMARY KEY (`calle`, `numero`, `Zona_nombre`),
+  INDEX `fk_Bloque_Zona1_idx` (`Zona_nombre` ASC) ,
+  CONSTRAINT `fk_Bloque_Zona1`
+  /*PRIMARY KEY (`calle`, `numero`,`Zona_nombre`),*/
     FOREIGN KEY (`Zona_nombre`)
     REFERENCES `catastro`.`Zona` (`nombre`)
     ON DELETE CASCADE
@@ -70,6 +75,9 @@ CREATE TABLE IF NOT EXISTS `catastro`.`Piso` (
   `Bloque_numero` INT NOT NULL,
   `Bloque_Zona_nombre` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`planta`, `letra`, `Bloque_calle`, `Bloque_numero`, `Bloque_Zona_nombre`),
+  INDEX `fk_Piso_Bloque1_idx` (`Bloque_calle` ASC, `Bloque_numero` ASC, `Bloque_Zona_nombre` ASC) ,
+  CONSTRAINT `fk_Piso_Bloque1`
+  /*PRIMARY KEY (`planta`, `letra`, `Bloque_calle`, `Bloque_numero`, `Bloque_Zona_nombre`),*/
     FOREIGN KEY (`Bloque_calle` , `Bloque_numero` , `Bloque_Zona_nombre`)
     REFERENCES `catastro`.`Bloque` (`calle` , `numero` , `Zona_nombre`)
     ON DELETE CASCADE
@@ -94,10 +102,14 @@ CREATE TABLE IF NOT EXISTS `catastro`.`Persona` (
   `Piso_Bloque_numero` INT NOT NULL,
   `Piso_Bloque_Zona_nombre` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`DNI`, `Vivienda_calle`, `Vivienda_numero`, `Vivienda_Zona_nombre`, `Piso_planta`, `Piso_letra`, `Piso_Bloque_calle`, `Piso_Bloque_numero`, `Piso_Bloque_Zona_nombre`),
+  INDEX `fk_Persona_Vivienda1_idx` (`Vivienda_calle` ASC, `Vivienda_numero` ASC, `Vivienda_Zona_nombre` ASC) ,
+  INDEX `fk_Persona_Piso1_idx` (`Piso_planta` ASC, `Piso_letra` ASC, `Piso_Bloque_calle` ASC, `Piso_Bloque_numero` ASC, `Piso_Bloque_Zona_nombre` ASC) ,
+  CONSTRAINT `fk_Persona_Vivienda1`
     FOREIGN KEY (`Vivienda_calle` , `Vivienda_numero` , `Vivienda_Zona_nombre`)
     REFERENCES `catastro`.`Vivienda` (`calle` , `numero` , `Zona_nombre`)
     ON DELETE CASCADE
     ON UPDATE CASCADE,
+    CONSTRAINT `fk_Persona_Piso1`
     FOREIGN KEY (`Piso_planta` , `Piso_letra` , `Piso_Bloque_calle` , `Piso_Bloque_numero` , `Piso_Bloque_Zona_nombre`)
     REFERENCES `catastro`.`Piso` (`planta` , `letra` , `Bloque_calle` , `Bloque_numero` , `Bloque_Zona_nombre`)
     ON DELETE CASCADE
