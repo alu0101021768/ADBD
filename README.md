@@ -56,7 +56,7 @@ Componentes del Grupo:
 ### Triggers
 
 - Trigger para generar un correo cuando no se especifique.
-~~~~sql
+```sql
     CREATE TRIGGER trigger_crear_email_before_insert BEFORE INSERT ON viveros.Cliente
     FOR EACH ROW
     BEGIN
@@ -64,7 +64,7 @@ Componentes del Grupo:
     CALL crear_email(new.nombre, new.dni, new.codigo, 'ull.edu.es', NEW.email);
     END IF;
     END; 
-~~~~
+```
 - Trigger para no permitir que una persona viva en más de una ubicación.
 
 ```sql
