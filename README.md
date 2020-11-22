@@ -60,7 +60,8 @@ Componentes del Grupo:
     CREATE TRIGGER trigger_crear_email_before_insert BEFORE INSERT ON `viveros`.`Cliente`
     FOR EACH ROW
     BEGIN
-    IF (NEW.email IS NULL) THEN
+    IF (NEW.email IS NULL) 
+    THEN
     CALL crear_email(new.nombre, new.dni, new.codigo, 'ull.edu.es', NEW.email);
     END IF;
     END; 
@@ -71,7 +72,8 @@ Componentes del Grupo:
     CREATE TRIGGER vivienda_unica_insert BEFORE INSERT ON `catastro`.`Persona` 
     FOR EACH ROW
     BEGIN
-    IF (new.Vivienda_calle IS NOT NULL AND new.Piso_Bloque_calle IS NOT NULL) THEN
+    IF (new.Vivienda_calle IS NOT NULL AND new.Piso_Bloque_calle IS NOT NULL) 
+    THEN
         signal sqlstate '45000' set message_text = 'Una persona no puede vivir en dos viviendas';
     END IF;
     END;
