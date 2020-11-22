@@ -108,6 +108,19 @@ CREATE TABLE IF NOT EXISTS `catastro`.`Persona` (
     ON UPDATE CASCADE)
 ENGINE = InnoDB;
 
+-- --------------------------------------------------------------------------
+-- Trigger vivienda_unica: comprueba que una persona solo tenga una vivienda
+-- --------------------------------------------------------------------------
+-- Como tenemos estructuradas las tablas, solo necesitamos comprobar que la persona viva 
+-- en una vivienda unifamiliar o en un piso, pero no en las dos cosas a la vez
+DROP TRIGGER IF EXISTS vivienda_unica;
+CREATE TRIGGER vivienda_unica BEFORE INSERT ON `catastro`.`Persona` 
+FOR EACH ROW
+BEGIN
+  IF (new.Vivienda_calle IS NOT NULL AND new.Piso_Bloque_calle IS NOT NULL) THEN
+    signal sqlstate '45000' set message_text = 'Una persona no puede vivir en dos viviendas';
+  END IF;
+END; 
 
 SET SQL_MODE=@OLD_SQL_MODE;
 SET FOREIGN_KEY_CHECKS=@OLD_FOREIGN_KEY_CHECKS;
