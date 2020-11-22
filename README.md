@@ -56,19 +56,19 @@ Componentes del Grupo:
 ### Triggers
 
 - Trigger para generar un correo cuando no se especifique.
-```sql
-    CREATE TRIGGER trigger_crear_email_before_insert BEFORE INSERT ON `viveros`.`Cliente`
+~~~~sql
+    CREATE TRIGGER trigger_crear_email_before_insert BEFORE INSERT ON viveros.Cliente
     FOR EACH ROW
     BEGIN
     IF (NEW.email IS NULL) THEN
     CALL crear_email(new.nombre, new.dni, new.codigo, 'ull.edu.es', NEW.email);
     END IF;
     END; 
-```
+~~~~
 - Trigger para no permitir que una persona viva en más de una ubicación.
 
 ```sql
-    CREATE TRIGGER vivienda_unica_insert BEFORE INSERT ON `catastro`.`Persona` 
+    CREATE TRIGGER vivienda_unica_insert BEFORE INSERT ON catastro.Persona 
     FOR EACH ROW
     BEGIN
     IF (new.Vivienda_calle IS NOT NULL AND new.Piso_Bloque_calle IS NOT NULL) THEN
@@ -88,7 +88,7 @@ Componentes del Grupo:
 - Trigger para actualizar automáticamente el stock de un producto.
 
 ```sql
-    CREATE TRIGGER trigger_actualizar_stock AFTER INSERT ON `viveros`.`Pedido_has_Producto`
+    CREATE TRIGGER trigger_actualizar_stock AFTER INSERT ON viveros.Pedido_has_Producto
     FOR EACH ROW
     BEGIN
         UPDATE Producto SET stock = stock - new.cant_prod WHERE new.Producto_cod_prod = cod_prod;
