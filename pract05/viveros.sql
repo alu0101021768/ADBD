@@ -93,7 +93,6 @@ CREATE TABLE IF NOT EXISTS `viveros`.`Pedido` (
   `codigo` INT NOT NULL,
   `fecha` DATE NOT NULL,
   `importe` FLOAT NOT NULL,
-  `cant_prod` INT NOT NULL,
   `EMPLEADO_dni` VARCHAR(45) NOT NULL,
   `CLIENTE_dni` VARCHAR(45) NOT NULL,
   PRIMARY KEY (`codigo`, `EMPLEADO_dni`, `CLIENTE_dni`),
@@ -158,6 +157,7 @@ CREATE TABLE IF NOT EXISTS `viveros`.`Pedido_has_Producto` (
   `Pedido_EMPLEADO_dni` VARCHAR(45) NOT NULL,
   `Pedido_CLIENTE_dni` VARCHAR(45) NOT NULL,
   `Producto_cod_prod` INT NOT NULL,
+  `cant_prod` INT NULL,
   PRIMARY KEY (`Pedido_codigo`, `Pedido_EMPLEADO_dni`, `Pedido_CLIENTE_dni`, `Producto_cod_prod`),
   CONSTRAINT `fk_Pedido_has_Producto_Pedido1`
     FOREIGN KEY (`Pedido_codigo` , `Pedido_EMPLEADO_dni` , `Pedido_CLIENTE_dni`)
@@ -177,21 +177,34 @@ ENGINE = InnoDB;
 DROP PROCEDURE IF EXISTS crear_email;
 
 USE `viveros`;
-CREATE PROCEDURE crear_email(IN id_persona VARCHAR(45), IN dominio VARCHAR(24), OUT nuevo_email VARCHAR(45)) 
+CREATE PROCEDURE crear_email(IN nombre_cliente VARCHAR(45), IN id_persona VARCHAR(45), IN code varchar(45), IN dominio VARCHAR(24), OUT nuevo_email VARCHAR(45)) 
 BEGIN
-  SET @nombre_cliente = (SELECT nombre FROM Cliente WHERE dni = id_persona);  
-  SET @code = (SELECT codigo FROM Cliente WHERE dni = id_persona);
-  SET nuevo_email = CONCAT(@nombre_cliente,@code,'@',dominio);
+    SET nuevo_email = CONCAT(nombre_cliente,code,'@',dominio);
 END;
 
 
+-- -------------------------------------------------------------------------------------------
+-- Trigger trigger_crear_email_before_insert: devuelve una dirección de correo electrónico
+-- ------------------------------------------------------------------------------------------- 
+DROP TRIGGER IF EXISTS trigger_crear_email_before_insert;
+CREATE TRIGGER trigger_crear_email_before_insert BEFORE INSERT ON `viveros`.`Cliente`
+FOR EACH ROW
+BEGIN
+  IF (NEW.email IS NULL) THEN
+    CALL crear_email(new.nombre, new.dni, new.codigo, 'ull.edu.es', NEW.email);
+  END IF;
+END; 
 
+-- ----------------------------------------------------------------------
+-- Trigger trigger_actualizar_stock: actualiza el stock de un producto
+-- ----------------------------------------------------------------------
 
-
-
-
-
-
+DROP TRIGGER IF EXISTS trigger_actualizar_stock;
+CREATE TRIGGER trigger_actualizar_stock AFTER INSERT ON `viveros`.`Pedido_has_Producto`
+FOR EACH ROW
+BEGIN
+  UPDATE Producto SET stock = stock - new.cant_prod WHERE new.Producto_cod_prod = cod_prod;
+END;
 
 
 
